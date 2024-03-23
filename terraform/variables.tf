@@ -1,5 +1,5 @@
 variable "gcp_project_id" {
-  default = "heredemo"
+  default = ""
 }
 
 variable "gcp_region" {
@@ -20,5 +20,4 @@ variable "image_name" {}
 
 variable "ip-public-checker-url" {
   default = "https://ifconfig.me/ip"
-  #  default = "https://2ip.io"
 }

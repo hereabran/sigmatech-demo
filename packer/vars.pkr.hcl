@@ -1,5 +1,5 @@
 variable "gcp_project_id" {
-  default = "heredemo"
+  default = ""
 }
 
 variable "gcp_region" {

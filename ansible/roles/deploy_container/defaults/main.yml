@@ -1,6 +1,6 @@
 containers:
 - container_image_tag: "latest"
-  container_image: "nginx:{{ container_image_tag }}"
+  container_image: "nginx"
   container_name: "nginx"
   container_host_port: "8080"
   container_port: "80"

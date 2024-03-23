@@ -74,3 +74,6 @@ run-ansible: # Run Ansible playbook to setup host configuration and deploy the r
 
 run-all: # Run all the steps for building and provisioning the infrastructure
 	make prepare validate packer-build run-terraform run-ansible
+
+clean:
+	make terraform-destroy del-packer-img

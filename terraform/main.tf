@@ -64,6 +64,10 @@ resource "google_compute_instance" "sigmatech-demo" {
     email  = google_service_account.sigmatech-demo.email
     scopes = ["cloud-platform"]
   }
+
+  depends_on = [
+    google_project_service.sigmatech-demo
+  ]
 }
 
 # Get local public IP
