@@ -25,7 +25,7 @@ prepare: # Prepare the environment and dependencies before execution
 	@echo "Running $(TF_CMD) init ..."
 	$(TF_CMD) -chdir=$(TF_DIR) init
 	@echo "Installing dependencies for ansible command ..."
-	pip3 install -r $(DIR)/requirements.txt
+	pip3 install -r $(PRJ_DIR)/requirements.txt
 	ansible-galaxy collection install -r $(ANSIBLE_DIR)/requirements.yml
 
 validate: # Validate the given Packer, Terraform and Ansible Configuration
