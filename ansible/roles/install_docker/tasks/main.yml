@@ -1,0 +1,34 @@
+---
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: present
+    update_cache: yes
+
+- name: Install required system packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: true
+  loop: "{{ required_sys_packages }}"
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+    state: present
+
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+  ignore_errors: yes
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker

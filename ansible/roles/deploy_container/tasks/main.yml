@@ -1,0 +1,33 @@
+---
+- name: Pull Docker image
+  community.docker.docker_image:
+    name: "{{ item.container_image }}:{{ item.container_image_tag }}"
+    source: pull
+  loop: "{{ containers }}"
+
+- name: Create containers
+  community.docker.docker_container:
+    name: "{{ item.container_name }}"
+    image: "{{ item.container_image }}:{{ item.container_image_tag }}"
+    ports:
+      - "{{ item.container_host_port }}:{{ item.container_port }}"
+    state: present
+  loop: "{{ containers }}"
+
+- name: Start the containers
+  community.docker.docker_container:
+    name: "{{ item.container_name }}"
+    state: started
+  loop: "{{ containers }}"
+
+- name: Retrieve Instance IP Public
+  uri:
+    url: https://ifconfig.me/ip
+    return_content: yes
+  register: instance_ip
+
+- name: Container Endpoint
+  debug:
+    msg: "{{ item.container_name }}: http://{{ instance_ip.content }}:{{ item.container_host_port }}"
+  loop: "{{ containers }}"
+  ignore_errors: yes

@@ -1,0 +1,13 @@
+- name: Deploy Apps
+  hosts: sigmatech-demo-instance
+  become: yes
+  vars:
+    containers:
+      - container_image_tag: "2.0.0"
+        container_image: "lissy93/dashy"
+        container_name: "dashy"
+        container_host_port: "8000"
+        container_port: "80"
+  roles:
+    - install_docker
+    - deploy_container
